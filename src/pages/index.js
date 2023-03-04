@@ -128,6 +128,7 @@ const IndexPage = () => {
     <main style={pageStyles}>
       <h1 style={headingStyles}>
         Congratulations
+        <p className="text-5xl">Tailwind</p>
         <br />
         <span style={headingAccentStyles}>— you just made a Gatsby site! 🎉🎉🎉</span>
       </h1>
