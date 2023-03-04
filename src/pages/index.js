@@ -1,4 +1,5 @@
 import * as React from "react"
+import { StaticImage } from "gatsby-plugin-image"
 
 const pageStyles = {
   color: "#232129",
@@ -125,50 +126,116 @@ const links = [
 
 const IndexPage = () => {
   return (
-    <main style={pageStyles}>
-      <h1 style={headingStyles}>
-        Congratulations
-        <p className="text-5xl">Tailwind</p>
-        <br />
-        <span style={headingAccentStyles}>— you just made a Gatsby site! 🎉🎉🎉</span>
-      </h1>
-      <p style={paragraphStyles}>
-        Edit <code style={codeStyles}>src/pages/index.js</code> to see this page
-        update in real-time. 😎
-      </p>
-      <ul style={listStyles}>
-        <li style={docLinkStyle}>
-          <a
-            style={linkStyle}
-            href={`${docLink.url}?utm_source=starter&utm_medium=start-page&utm_campaign=minimal-starter`}
-          >
-            {docLink.text}
-          </a>
-        </li>
-        {links.map(link => (
-          <li key={link.url} style={{ ...listItemStyles, color: link.color }}>
-            <span>
-              <a
-                style={linkStyle}
-                href={`${link.url}?utm_source=starter&utm_medium=start-page&utm_campaign=minimal-starter`}
-              >
-                {link.text}
-              </a>
-              {link.badge && (
-                <span style={badgeStyle} aria-label="New Badge">
-                  NEW!
-                </span>
-              )}
-              <p style={descriptionStyle}>{link.description}</p>
-            </span>
-          </li>
-        ))}
-      </ul>
-      <img
-        alt="Gatsby G Logo"
-        src="data:image/svg+xml,%3Csvg width='24' height='24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 2a10 10 0 110 20 10 10 0 010-20zm0 2c-3.73 0-6.86 2.55-7.75 6L14 19.75c3.45-.89 6-4.02 6-7.75h-5.25v1.5h3.45a6.37 6.37 0 01-3.89 4.44L6.06 9.69C7 7.31 9.3 5.63 12 5.63c2.13 0 4 1.04 5.18 2.65l1.23-1.06A7.959 7.959 0 0012 4zm-8 8a8 8 0 008 8c.04 0 .09 0-8-8z' fill='%23639'/%3E%3C/svg%3E"
-      />
-    </main>
+    // <main style={pageStyles}>
+    //   <h1 style={headingStyles}>
+    //     Congratulations
+    //     <p className="text-5xl">Tailwind</p>
+    //     <br />
+    //     <span style={headingAccentStyles}>— you just made a Gatsby site! 🎉🎉🎉</span>
+    //   </h1>
+    //   <p style={paragraphStyles}>
+    //     Edit <code style={codeStyles}>src/pages/index.js</code> to see this page
+    //     update in real-time. 😎
+    //   </p>
+    //   <ul style={listStyles}>
+    //     <li style={docLinkStyle}>
+    //       <a
+    //         style={linkStyle}
+    //         href={`${docLink.url}?utm_source=starter&utm_medium=start-page&utm_campaign=minimal-starter`}
+    //       >
+    //         {docLink.text}
+    //       </a>
+    //     </li>
+    //     {links.map(link => (
+    //       <li key={link.url} style={{ ...listItemStyles, color: link.color }}>
+    //         <span>
+    //           <a
+    //             style={linkStyle}
+    //             href={`${link.url}?utm_source=starter&utm_medium=start-page&utm_campaign=minimal-starter`}
+    //           >
+    //             {link.text}
+    //           </a>
+    //           {link.badge && (
+    //             <span style={badgeStyle} aria-label="New Badge">
+    //               NEW!
+    //             </span>
+    //           )}
+    //           <p style={descriptionStyle}>{link.description}</p>
+    //         </span>
+    //       </li>
+    //     ))}
+    //   </ul>
+    //   <img
+    //     alt="Gatsby G Logo"
+    //     src="data:image/svg+xml,%3Csvg width='24' height='24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 2a10 10 0 110 20 10 10 0 010-20zm0 2c-3.73 0-6.86 2.55-7.75 6L14 19.75c3.45-.89 6-4.02 6-7.75h-5.25v1.5h3.45a6.37 6.37 0 01-3.89 4.44L6.06 9.69C7 7.31 9.3 5.63 12 5.63c2.13 0 4 1.04 5.18 2.65l1.23-1.06A7.959 7.959 0 0012 4zm-8 8a8 8 0 008 8c.04 0 .09 0-8-8z' fill='%23639'/%3E%3C/svg%3E"
+    //   />
+    // </main>
+
+    <body>
+    {/* <!-- HERO --> */}
+    <div
+      class="flex flex-col pt-60 bg-no-repeat bg-cover h-screen"
+    >
+      {/* <!-- Logo --> */}
+      <div class="flex justify-center">
+        <img class="logo" src="../images/logo.png" alt="" />
+        <StaticImage className="w-[200px]" src="../images/logo.png" />
+      </div>
+
+      {/* <!-- HERO Text --> */}
+      <div class="flex flex-col">
+        <div class="flex justify-center pt-6">
+          <p class="text-4xl">
+            Hi! I'm <span class=" font-extrabold">Marco!</span>
+          </p>
+        </div>
+
+        <div class="flex justify-center">
+          <p class="text-xl">Tech-enthusiast and Software Developer!</p>
+        </div>
+      </div>
+    </div>
+
+    {/* <!-- About me --> */}
+    <div class="flex flex-col h-screen p-40">
+      <h1 class="text-4xl">About Me 🙋‍♂️</h1>
+
+      <div class="flex flex-col pt-10">
+        <div class="flex flex-row pt-10">
+          <div class="w-1/3 text-[70px] text-center">📚</div>
+
+          <div class="w-full pt-3 text-2xl">
+            I am currently a 4th year in Ateneo de Manila University, pursuing a
+            degree in
+            <p class="">BS Management Information Systems</p>
+          </div>
+        </div>
+
+        <div class="flex flex-row pt-10">
+          <div class="w-1/3 text-[70px] text-center">🎮</div>
+
+          <div class="w-full pt-3 text-2xl">My hobbies include</div>
+        </div>
+      </div>
+    </div>
+
+    {/* <!-- My Projects --> */}
+    <div></div>
+
+    {/* <!-- Contact Me --> */}
+    <div class="flex flex-col justify-center text-center py-8 bg-[#36454F]">
+      <div class="flex flex-row justify-center">
+        <div class="flex w-1/4 text-5xl justify-around text-[#f97419]">
+         <a href="https://www.linkedin.com/in/marco-francisco-5aa8ab1a1/" target="_blank"><i class="fa-brands fa-linkedin hover:text-[#db6616]"></i></a> 
+         <a href="mailto:mfranciscowork13@gmail.com"><i class="fa-solid fa-envelope hover:text-[#db6616]"></i></a> 
+          <a href="https://github.com/MarcoFrancisco13" target="_blank"><i class="fa-brands fa-github hover:text-[#db6616]"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <script src="static/custom.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  </body>
   )
 }
 
