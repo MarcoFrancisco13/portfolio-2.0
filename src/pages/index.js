@@ -1,4 +1,6 @@
 import * as React from "react";
+
+import Layout from "../components/layout";
 import { StaticImage } from "gatsby-plugin-image";
 import { graphql } from "gatsby";
 
@@ -8,7 +10,7 @@ const IndexPage = ({ data }) => {
   const toolData = data.allContentfulSkillsTools.nodes;
 
   return (
-    <body>
+    <Layout>
       <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
@@ -18,7 +20,7 @@ const IndexPage = ({ data }) => {
       />
 
       {/* <!-- HERO --> */}
-      <div class="flex flex-col pt-60 bg-[url('../images/hero.png')] bg-no-repeat bg-cover h-screen">
+      <div class="flex flex-col pt-60 max-[600px]:bg-[url('../images/hero-mobile.png')] max-[1250px]:bg-[url('../images/hero-tablet.png')] min-[1250px]:bg-[url('../images/hero.png')] bg-no-repeat bg-cover h-screen">
         {/* <!-- Logo --> */}
         <div class="flex justify-center">
           <img class="logo" src="../images/logo.png" alt="" />
@@ -29,135 +31,124 @@ const IndexPage = ({ data }) => {
         <div class="flex flex-col">
           <div class="flex justify-center pt-6">
             <p class="text-4xl">
-              Hi! I'm <span class=" font-extrabold">Marco!</span>
+              Hi! I'm <span class=" font-bold text-[#f97419]">Marco!</span>
             </p>
           </div>
 
-          <div class="flex justify-center">
+          <div class="flex justify-center text-center">
             <p class="text-xl">Tech-enthusiast and Software Developer!</p>
           </div>
         </div>
       </div>
 
       {/* <!-- About me --> */}
-      <div class="flex flex-col h-screen p-40">
-        <h1 class="text-4xl">About Me 🙋‍♂️</h1>
+      <div class="flex flex-col p-10 pb-0">
+        <h1 class="text-4xl font-bold">About Me 📚</h1>
 
-        <div class="flex flex-col pt-10">
-          <div class="flex flex-row pt-10">
-            <div class="w-1/3 text-[70px] text-center">📚</div>
-
-            <div class="w-full pt-3 text-2xl">
-              I am currently a 4th year in Ateneo de Manila University, pursuing
-              a degree in
-              <p class="">BS Management Information Systems</p>
-            </div>
+        <div className="flex flex-col min-[1000px]:flex-row mt-20 items-center px-10">
+          <div className="flex w-full max-w-[490px]  rounded-full overflow-hidden min-[1000px]:mr-20">
+            <StaticImage src="../images/portrait.jpeg" />
           </div>
 
-          {/* <div class="flex flex-row pt-10">
-            <div class="w-1/3 text-[70px] text-center">🎮</div>
-
-            <div class="w-full pt-3 text-2xl">My hobbies include</div>
-          </div> */}
-
-          {/* Skills */}
-
-          <div className="flex flex-col justify-center mt-20">
-            <div className="text-center">
-              <h1 className="text-5xl font-bold">SKILLS</h1>
-            </div>
-
-            <div className="flex flex-col md:flex-row pt-10 justify-around">
-              <div className="w-1/4 text-center shadow-black rounded-lg bg-[#36454F] text-white px-8 py-4">
-                <h4 className="text-xl">Languages</h4>
-                <div className="flex flex-row flex-wrap justify-center">
-                  {languageData.map(({ language }) => (
-                    <div className="rounded-lg bg-[#f97419] mr-2 mt-2 px-2">
-                      {language}
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="w-1/4 text-center shadow-black rounded-lg bg-[#36454F] text-white px-8 py-4">
-                <h4 className="text-xl">Frameworks</h4>
-
-                <div className="flex flex-row flex-wrap justify-center">
-                  {frameworkData.map(({ framework }) => (
-                    <div className="rounded-lg bg-[#f97419] mr-2 mt-2 px-2">
-                      {framework}
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="w-1/4 text-center shadow-black rounded-lg bg-[#36454F] text-white px-8 py-4">
-                <h4 className="text-xl">Tools</h4>
-
-                <div className="flex flex-row flex-wrap justify-center">
-                  {toolData.map(({ tool }) => (
-                    <div className="rounded-lg bg-[#f97419] mr-2 mt-2 px-2">
-                      {tool}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
+          <div class="w-full text-2xl text-left max-[999px]:text-center max-[999px]:py-12">
+            <p className="text-xl">
+              Hi! My name is Marco Francisco and I am currently a 4th year in
+              Ateneo de Manila University, pursuing a degree in{" "}
+              <span class="text-[#f97419] font-semibold">
+                BS Management Information Systems.
+              </span>{" "}
+              Despite the managerial side of my course, I also have a great
+              interest in coding efficient and responsive platforms!
+            </p>
+            <br />
+            <p className="text-xl">
+              I have had the privilege of interning at various companies that
+              fostered my skills in{" "}
+              <span class="text-[#f97419] font-semibold">Web Development</span>{" "}
+              and{" "}
+              <span class="text-[#f97419] font-semibold">
+                Software Engineering.
+              </span>
+            </p>
           </div>
         </div>
       </div>
 
-      {/*  */}
+      {/* SKILLS */}
+      <div className="flex flex-col justify-center mt-20 p-20 pt-0">
+        <div className="text-center">
+          <h1 className="text-4xl font-bold">SKILLS</h1>
+        </div>
+
+        <div className="flex flex-col min-[768px]:flex-row pt-5 justify-around">
+          <div className="max-[767px]:w-full w-1/4 text-center shadow-black rounded-lg bg-[#36454F] text-white px-8 py-4 mt-8">
+            <h4 className="text-xl font-medium">Languages</h4>
+            <div className="flex flex-row flex-wrap justify-center">
+              {languageData.map(({ language }) => (
+                <div className="rounded-lg bg-[#f97419] mr-2 mt-2 px-2">
+                  {language}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="max-[767px]:w-full w-1/4 text-center shadow-black rounded-lg bg-[#36454F] text-white px-8 py-4 mt-8">
+            <h4 className="text-xl font-medium">Frameworks</h4>
+
+            <div className="flex flex-row flex-wrap justify-center">
+              {frameworkData.map(({ framework }) => (
+                <div className="rounded-lg bg-[#f97419] mr-2 mt-2 px-2">
+                  {framework}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="max-[767px]:w-full w-1/4 text-center shadow-black rounded-lg bg-[#36454F] text-white px-8 py-4 mt-8">
+            <h4 className="text-xl font-medium">Tools</h4>
+
+            <div className="flex flex-row flex-wrap justify-center">
+              {toolData.map(({ tool }) => (
+                <div className="rounded-lg bg-[#f97419] mr-2 mt-2 px-2">
+                  {tool}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
 
       {/* <!-- My Projects --> */}
-      <div></div>
+      <div>
 
-      {/* <!-- Contact Me --> */}
-      <div class="flex flex-col justify-center text-center py-8 bg-[#36454F]">
-        <div class="flex flex-row justify-center">
-          <div class="flex w-1/4 text-5xl justify-around text-[#f97419]">
-            <a
-              href="https://www.linkedin.com/in/marco-francisco-5aa8ab1a1/"
-              target="_blank"
-            >
-              <i class="fa-brands fa-linkedin hover:text-[#db6616]"></i>
-            </a>
-            <a href="mailto:mfranciscowork13@gmail.com">
-              <i class="fa-solid fa-envelope hover:text-[#db6616]"></i>
-            </a>
-            <a href="https://github.com/MarcoFrancisco13" target="_blank">
-              <i class="fa-brands fa-github hover:text-[#db6616]"></i>
-            </a>
-          </div>
+      <div className="text-center">
+          <h1 className="text-4xl font-bold">PROJECTS</h1>
         </div>
       </div>
-
-      <script src="static/custom.js"></script>
-      <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    </body>
+    </Layout>
   );
 };
 
 export default IndexPage;
 
 export const languageQuery = graphql`
-query MyQuery {
-  allContentfulSkillsLanguages {
-    nodes {
-      language
+  query MyQuery {
+    allContentfulSkillsLanguages {
+      nodes {
+        language
+      }
+    }
+    allContentfulSkillsFrameworks {
+      nodes {
+        framework
+      }
+    }
+    allContentfulSkillsTools {
+      nodes {
+        tool
+      }
     }
   }
-  allContentfulSkillsFrameworks {
-    nodes {
-      framework
-    }
-  }
-  allContentfulSkillsTools {
-    nodes {
-      tool
-    }
-  }
-}
 `;
 
 export const Head = () => <title>Marco Francisco</title>;
