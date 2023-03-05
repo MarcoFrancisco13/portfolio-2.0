@@ -12,5 +12,5 @@ module.exports = {
       "accessToken": "9OGmaY7CkeEUVV9O_ZTW2nRbyhQUXlcQ5I2EGTzEwZQ",
       "spaceId": "byvz0lerhhcx"
     }
-  }, "gatsby-plugin-image", "gatsby-plugin-sharp", "gatsby-transformer-sharp", "gatsby-plugin-postcss", "gatsby-plugin-fontawesome-css",]
+  }, "gatsby-plugin-image", "gatsby-plugin-sharp", "gatsby-transformer-sharp", "gatsby-plugin-postcss",]
 };
