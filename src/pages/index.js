@@ -2,12 +2,19 @@ import * as React from "react";
 
 import Layout from "../components/layout";
 import { StaticImage } from "gatsby-plugin-image";
+import { GatsbyImage } from 'gatsby-plugin-image';
+import { renderRichText } from "gatsby-source-contentful/rich-text";
+import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
+
+
 import { graphql } from "gatsby";
+import * as moment from "moment";
 
 const IndexPage = ({ data }) => {
   const languageData = data.allContentfulSkillsLanguages.nodes;
   const frameworkData = data.allContentfulSkillsFrameworks.nodes;
   const toolData = data.allContentfulSkillsTools.nodes;
+  const projectData = data.allContentfulProjects.nodes;
 
   return (
     <Layout>
@@ -36,17 +43,15 @@ const IndexPage = ({ data }) => {
           </div>
 
           <div class="flex justify-center text-center">
-            <p class="text-xl">Tech-enthusiast and Software Developer!</p>
+            <p class="text-xl">Tech enjoyer and Software Developer!</p>
           </div>
         </div>
       </div>
 
       {/* <!-- About me --> */}
-      <div class="flex flex-col p-10 pb-0">
-        <h1 class="text-4xl font-bold">About Me 📚</h1>
-
-        <div className="flex flex-col min-[1000px]:flex-row mt-20 items-center px-10">
-          <div className="flex w-full max-w-[490px]  rounded-full overflow-hidden min-[1000px]:mr-20">
+      <div class="flex flex-col p-14 pb-0">
+        <div className="flex flex-col min-[1000px]:flex-row mt-20 items-center justify-between">
+          <div className="flex w-full max-w-[490px]  rounded-lg overflow-hidden min-[1000px]:mr-20">
             <StaticImage src="../images/portrait.jpeg" />
           </div>
 
@@ -57,7 +62,7 @@ const IndexPage = ({ data }) => {
               <span class="text-[#f97419] font-semibold">
                 BS Management Information Systems.
               </span>{" "}
-              Despite the managerial side of my course, I also have a great
+              On top of the managerial side of my course, I also have a great
               interest in coding efficient and responsive platforms!
             </p>
             <br />
@@ -75,7 +80,7 @@ const IndexPage = ({ data }) => {
       </div>
 
       {/* SKILLS */}
-      <div className="flex flex-col justify-center mt-20 p-20 pt-0">
+      <div className="flex flex-col justify-center mt-20 p-14 pt-0">
         <div className="text-center">
           <h1 className="text-4xl font-bold">SKILLS</h1>
         </div>
@@ -119,11 +124,35 @@ const IndexPage = ({ data }) => {
       </div>
 
       {/* <!-- My Projects --> */}
-      <div>
-
-      <div className="text-center">
+      <div className="flex flex-col p-14">
+        <div className="text-center">
           <h1 className="text-4xl font-bold">PROJECTS</h1>
         </div>
+
+        {/* Sourced from contenful */}
+        {projectData.map(({ endDate, startDate, projectDescription, githubLink, pic, projectName}) => (
+
+          <div className="flex flex-col min-[1000px]:flex-row text-center min-[1000px]:text-left justify-center rounded-lg bg-[#36454F] p-10 mt-10">
+            <div className="flex justify-center ml-5 w-full min-[1000px]:w-1/2">
+              <div>
+                <GatsbyImage
+                    className="min-h-[400px] max-h-[700px] mr-10 mb-10 max-[700px]:hidden"
+                    image={pic.gatsbyImage}
+                  />
+              </div>
+            </div>
+
+            <div className="w-full min-[1000px]:w-1/2">
+              <h1 className="text-[#f97419] text-4xl font-bold">{projectName}</h1>
+              <p className="text-white font-semibold">
+                {moment(startDate).format('MMM YYYY')} - {moment(endDate).format('MMM YYYY')}
+              </p>
+              <p className="text-white mt-10 text-2xl">{renderRichText(projectDescription)}</p>
+
+              <p className="text-white mt-10 text-2xl">Check it out <a className="text-[#f97419]" target="_blank" href={githubLink}>here</a></p>
+            </div>
+          </div>
+        ))}
       </div>
     </Layout>
   );
@@ -131,16 +160,32 @@ const IndexPage = ({ data }) => {
 
 export default IndexPage;
 
-export const languageQuery = graphql`
+export const query = graphql`
   query MyQuery {
-    allContentfulSkillsLanguages {
+    allContentfulProjects {
       nodes {
-        language
+        projectName
+        projectDescription {
+          raw
+        }
+        startDate
+        endDate
+        githubLink
+        pic {
+          gatsbyImage(
+            width: 700
+          )
+        }
       }
     }
     allContentfulSkillsFrameworks {
       nodes {
         framework
+      }
+    }
+    allContentfulSkillsLanguages {
+      nodes {
+        language
       }
     }
     allContentfulSkillsTools {
