@@ -2,10 +2,9 @@ import * as React from "react";
 
 import Layout from "../components/layout";
 import { StaticImage } from "gatsby-plugin-image";
-import { GatsbyImage } from 'gatsby-plugin-image';
+import { GatsbyImage } from "gatsby-plugin-image";
 import { renderRichText } from "gatsby-source-contentful/rich-text";
-import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
-
+import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 
 import { graphql } from "gatsby";
 import * as moment from "moment";
@@ -15,6 +14,12 @@ const IndexPage = ({ data }) => {
   const frameworkData = data.allContentfulSkillsFrameworks.nodes;
   const toolData = data.allContentfulSkillsTools.nodes;
   const projectData = data.allContentfulProjects.nodes;
+
+  const sortedProjectData = projectData.sort(function (a, b) {
+    return new Date(b.endDate) - new Date(a.endDate);
+  });
+
+  console.log(sortedProjectData);
 
   return (
     <Layout>
@@ -73,7 +78,13 @@ const IndexPage = ({ data }) => {
               and{" "}
               <span class="text-[#f97419] font-semibold">
                 Software Engineering.
+              </span>{" "}
+              In the future, I aspire to pursue a career in these lines of work
+              as I believe that my skills primarily align with that of{" "}
+              <span class="text-[#f97419] font-semibold">
+                Software Development.
               </span>
+              .
             </p>
           </div>
         </div>
@@ -130,29 +141,73 @@ const IndexPage = ({ data }) => {
         </div>
 
         {/* Sourced from contenful */}
-        {projectData.map(({ endDate, startDate, projectDescription, githubLink, pic, projectName}) => (
+        {sortedProjectData
+          .sort((a, b) => a.endDate - b.endDate)
+          .map(
+            ({
+              endDate,
+              startDate,
+              projectOverview,
+              projectDescription,
+              githubLink,
+              pic,
+              projectName,
+              techstacks,
+            }) => (
+              <div className="flex flex-col min-[1000px]:flex-row text-center min-[1000px]:text-left justify-center rounded-lg bg-[#36454F] p-10 mt-10">
+                <div className="flex justify-center ml-5 w-full min-[1000px]:w-1/2">
+                  <div>
+                    <GatsbyImage
+                      className="min-h-[400px] max-h-[700px] mr-10 mb-10 max-[700px]:hidden"
+                      image={pic.gatsbyImage}
+                    />
+                  </div>
+                </div>
 
-          <div className="flex flex-col min-[1000px]:flex-row text-center min-[1000px]:text-left justify-center rounded-lg bg-[#36454F] p-10 mt-10">
-            <div className="flex justify-center ml-5 w-full min-[1000px]:w-1/2">
-              <div>
-                <GatsbyImage
-                    className="min-h-[400px] max-h-[700px] mr-10 mb-10 max-[700px]:hidden"
-                    image={pic.gatsbyImage}
-                  />
+                <div className="w-full min-[1000px]:w-1/2">
+                  <h1 className="text-[#f97419] text-4xl font-bold">
+                    {projectName}
+                  </h1>
+
+                  <div className="flex flex-row flex-wrap mb-3 max-[1000px]:justify-center">
+                    {techstacks.map((techstack) => {
+                      return (
+                        <div className="rounded-lg bg-[#f97419] text-white mr-2 mt-2 px-2">
+                          {techstack}
+                        </div>
+                      );
+                    })}
+                  </div>
+
+                  <p className="text-white font-semibold">
+                    {moment(startDate).format("MMM YYYY")} -{" "}
+                    {moment(endDate).format("MMM YYYY")}
+                  </p>
+
+                  <p className="text-white mt-10 text-2xl">
+                    {renderRichText(projectOverview)}
+                  </p>
+                  <p className="text-white mt-10 text-2xl">
+                    {renderRichText(projectDescription)}
+                  </p>
+
+                  {githubLink != null ? (
+                    <p className="text-white mt-10 text-2xl">
+                      Check it out{" "}
+                      <a
+                        className="text-[#f97419] underline underline-offset-2"
+                        target="_blank"
+                        href={githubLink}
+                      >
+                        here
+                      </a>
+                      !
+                    </p>
+                  ) : null}
+                </div>
               </div>
-            </div>
-
-            <div className="w-full min-[1000px]:w-1/2">
-              <h1 className="text-[#f97419] text-4xl font-bold">{projectName}</h1>
-              <p className="text-white font-semibold">
-                {moment(startDate).format('MMM YYYY')} - {moment(endDate).format('MMM YYYY')}
-              </p>
-              <p className="text-white mt-10 text-2xl">{renderRichText(projectDescription)}</p>
-
-              <p className="text-white mt-10 text-2xl">Check it out <a className="text-[#f97419]" target="_blank" href={githubLink}>here</a></p>
-            </div>
-          </div>
-        ))}
+            )
+          )}
       </div>
     </Layout>
   );
@@ -168,13 +223,15 @@ export const query = graphql`
         projectDescription {
           raw
         }
+        projectOverview {
+          raw
+        }
         startDate
         endDate
+        techstacks
         githubLink
         pic {
-          gatsbyImage(
-            width: 700
-          )
+          gatsbyImage(width: 700)
         }
       }
     }
