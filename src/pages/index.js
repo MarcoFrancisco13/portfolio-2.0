@@ -60,8 +60,8 @@ const IndexPage = ({ data }) => {
             <StaticImage src="../images/portrait.jpeg" />
           </div>
 
-          <div class="w-full text-2xl text-left max-[999px]:text-center max-[999px]:py-12">
-            <p className="text-xl">
+          <div class="w-full text-left max-[999px]:text-center max-[999px]:py-12">
+            <p className="text-2xl">
               Hi! My name is Marco Francisco and I am currently a 4th year in
               Ateneo de Manila University, pursuing a degree in{" "}
               <span class="text-[#f97419] font-semibold">
@@ -71,7 +71,7 @@ const IndexPage = ({ data }) => {
               interest in coding efficient and responsive platforms!
             </p>
             <br />
-            <p className="text-xl">
+            <p className="text-2xl">
               I have had the privilege of interning at various companies that
               fostered my skills in{" "}
               <span class="text-[#f97419] font-semibold">Web Development</span>{" "}
@@ -84,7 +84,6 @@ const IndexPage = ({ data }) => {
               <span class="text-[#f97419] font-semibold">
                 Software Development.
               </span>
-              .
             </p>
           </div>
         </div>
@@ -154,7 +153,7 @@ const IndexPage = ({ data }) => {
               projectName,
               techstacks,
             }) => (
-              <div className="flex flex-col min-[1000px]:flex-row text-center min-[1000px]:text-left justify-center rounded-lg bg-[#36454F] p-10 mt-10">
+              <div className="flex flex-col min-[1000px]:flex-row text-center min-[1000px]:text-left justify-center rounded-lg bg-[#F5F5F5] p-10 mt-10">
                 <div className="flex justify-center ml-5 w-full min-[1000px]:w-1/2">
                   <div>
                     <GatsbyImage
@@ -179,20 +178,20 @@ const IndexPage = ({ data }) => {
                     })}
                   </div>
 
-                  <p className="text-white font-semibold">
+                  <p className=" font-semibold">
                     {moment(startDate).format("MMM YYYY")} -{" "}
                     {moment(endDate).format("MMM YYYY")}
                   </p>
 
-                  <p className="text-white mt-10 text-2xl">
+                  <p className=" mt-10 text-2xl">
                     {renderRichText(projectOverview)}
                   </p>
-                  <p className="text-white mt-10 text-2xl">
+                  <p className=" mt-10 text-2xl">
                     {renderRichText(projectDescription)}
                   </p>
 
                   {githubLink != null ? (
-                    <p className="text-white mt-10 text-2xl">
+                    <p className=" mt-10 text-2xl">
                       Check it out{" "}
                       <a
                         className="text-[#f97419] underline underline-offset-2"
